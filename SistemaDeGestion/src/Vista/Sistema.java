@@ -5,20 +5,48 @@
  */
 package Vista;
 
+import Modelo.Cliente;
+import Modelo.ClienteDao;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Lana
  */
 public class Sistema extends javax.swing.JFrame {
-
+Cliente cl = new Cliente();
+ClienteDao client = new ClienteDao();
+DefaultTableModel modelo=new DefaultTableModel();
     /**
      * Creates new form Sistema
      */
     public Sistema() {
-        initComponents();
-         this.setLocationRelativeTo(null);
+        initComponents();   }
+    public void ListarCliente(){
+    List<Cliente>ListarCl=client.ListarCliente();
+    modelo=(DefaultTableModel) TableCliente.getModel();
+    Object[] ob= new Object[6];
+    
+    for(int i=0; i<ListarCl.size(); i++){
+    ob[0]=ListarCl.get(i).getId();
+    ob[1]=ListarCl.get(i).getDni();
+    ob[2]=ListarCl.get(i).getNombre();
+    ob[3]=ListarCl.get(i).getTelefono();
+    ob[4]=ListarCl.get(i).getDireccion();
+    ob[5]=ListarCl.get(i).getRazon();
+    modelo.addRow(ob);
     }
-
+    TableCliente.setModel(modelo);
+    }
+    
+public void LimpiarTable(){
+    for (int i = 0; i < modelo.getRowCount(); i++) {
+        modelo.removeRow(i);
+        i=i-1;
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -153,6 +181,11 @@ public class Sistema extends javax.swing.JFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Clientes.png"))); // NOI18N
         jButton2.setText("Clientes");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proveedor.png"))); // NOI18N
         jButton3.setText("Proveedor");
@@ -428,16 +461,17 @@ public class Sistema extends javax.swing.JFrame {
 
             },
             new String [] {
-                "DNI/RUC", "NOMBRE", "TELÉFONO", "DIRECCIÓN", "RAZÓN SOCIAL"
+                "ID", "DNI/RUC", "NOMBRE", "TELÉFONO", "DIRECCIÓN", "RAZÓN SOCIAL"
             }
         ));
         jScrollPane2.setViewportView(TableCliente);
         if (TableCliente.getColumnModel().getColumnCount() > 0) {
-            TableCliente.getColumnModel().getColumn(0).setPreferredWidth(50);
-            TableCliente.getColumnModel().getColumn(1).setPreferredWidth(100);
-            TableCliente.getColumnModel().getColumn(2).setPreferredWidth(50);
-            TableCliente.getColumnModel().getColumn(3).setPreferredWidth(80);
+            TableCliente.getColumnModel().getColumn(0).setPreferredWidth(20);
+            TableCliente.getColumnModel().getColumn(1).setPreferredWidth(50);
+            TableCliente.getColumnModel().getColumn(2).setPreferredWidth(100);
+            TableCliente.getColumnModel().getColumn(3).setPreferredWidth(50);
             TableCliente.getColumnModel().getColumn(4).setPreferredWidth(80);
+            TableCliente.getColumnModel().getColumn(5).setPreferredWidth(80);
         }
 
         btnGuardarCliente.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
@@ -986,6 +1020,17 @@ public class Sistema extends javax.swing.JFrame {
 
     private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
         // TODO add your handling code here:
+        if(!"".equals(txtDniCliente.getText())|| !"".equals(txtNombreCliente.getText())||!"".equals(txtTelefonoCliente.getText())||!"".equals(txtDireccionCliente.getText())){
+            cl.setDni(Integer.parseInt(txtDniCliente.getText()));
+            cl.setNombre(txtNombreCliente.getText());
+            cl.setTelefono(Integer.parseInt(txtTelefonoCliente.getText()));
+            cl.setDireccion(txtDireccionCliente.getText());
+            cl.setRazon(txtRazonCliente.getText());
+            client.RegistrarCliente(cl);
+            JOptionPane.showMessageDialog(null,"Cliente Registrado");
+        }else{
+            JOptionPane.showMessageDialog(null,"Se encuentran campos vacios");
+        }
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
 
     private void txtNombreProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProveedorActionPerformed
@@ -999,6 +1044,13 @@ public class Sistema extends javax.swing.JFrame {
     private void jTextField22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField22ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField22ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        LimpiarTable();
+        ListarCliente();
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
