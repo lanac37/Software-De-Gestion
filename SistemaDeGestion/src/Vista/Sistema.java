@@ -51,8 +51,8 @@ public class Sistema extends javax.swing.JFrame {
         }
         TableCliente.setModel(modelo);
     }
-    
-        public void ListarProveedor() {
+
+    public void ListarProveedor() {
         List<Proveedor> ListarPr = PrDao.ListaProveedor();
         modelo = (DefaultTableModel) TableProveedor.getModel();
         Object[] ob = new Object[6];
@@ -1100,7 +1100,7 @@ public class Sistema extends javax.swing.JFrame {
             ListarCliente();
             JOptionPane.showMessageDialog(null, "Cliente Registrado");
         }
-        
+
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
 
     private void txtNombreProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProveedorActionPerformed
@@ -1194,6 +1194,7 @@ public class Sistema extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Los campos estan vacios");
         }
+        
     }//GEN-LAST:event_btnguardarProveedorActionPerformed
 
     private void txtRucProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRucProveedorActionPerformed
@@ -1202,6 +1203,8 @@ public class Sistema extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        LimpiarTable();
+          
         ListarProveedor();
         jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_jButton3ActionPerformed
