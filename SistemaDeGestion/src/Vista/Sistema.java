@@ -1031,6 +1031,8 @@ public void LimpiarTable(){
         }else{
             JOptionPane.showMessageDialog(null,"Se encuentran campos vacios");
         }
+        LimpiarTable();
+        ListarCliente();
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
 
     private void txtNombreProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProveedorActionPerformed
