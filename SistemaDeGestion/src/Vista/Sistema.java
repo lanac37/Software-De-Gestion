@@ -1100,8 +1100,7 @@ public class Sistema extends javax.swing.JFrame {
             ListarCliente();
             JOptionPane.showMessageDialog(null, "Cliente Registrado");
         }
-        LimpiarTable();
-        ListarCliente();
+        
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
 
     private void txtNombreProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProveedorActionPerformed
@@ -1171,6 +1170,8 @@ public class Sistema extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "los campos estan vacios");
             }
+            LimpiarTable();
+            ListarCliente();
         }
     }//GEN-LAST:event_btnEditarClienteActionPerformed
 
