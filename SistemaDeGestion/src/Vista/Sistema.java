@@ -1100,6 +1100,8 @@ public class Sistema extends javax.swing.JFrame {
             ListarCliente();
             JOptionPane.showMessageDialog(null, "Cliente Registrado");
         }
+        LimpiarTable();
+        ListarCliente();
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
 
     private void txtNombreProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProveedorActionPerformed
