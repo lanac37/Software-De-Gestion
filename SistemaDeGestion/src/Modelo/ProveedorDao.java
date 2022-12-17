@@ -23,16 +23,16 @@ public class ProveedorDao {
     PreparedStatement ps;
     ResultSet rs;
 
-    public boolean RegistrarProveedor(Proveedor pr) {
+    public boolean RegistrarProveedor(Proveedor pro) {
         String sql = "INSERT INTO proveedor (ruc,nombre,telefono,direccion,razon)VALUES(?,?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, pr.getRuc());
-            ps.setString(2, pr.getNombre());
-            ps.setInt(3, pr.getTelefono());
-            ps.setString(4, pr.getDireccion());
-            ps.setString(5, pr.getRazon());
+            ps.setInt(1, pro.getRuc());
+            ps.setString(2, pro.getNombre());
+            ps.setInt(3, pro.getTelefono());
+            ps.setString(4, pro.getDireccion());
+            ps.setString(5, pro.getRazon());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -70,4 +70,58 @@ public class ProveedorDao {
         }
         return Listapr;
     }
+    
+    public boolean EliminarProveedro(int id){
+        
+        try{
+            String sql="DELETE  FROM proveedor WHERE id =?";
+            con = cn.getConnection();
+            ps= con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            return true;
+        }catch(SQLException e){
+            System.out.println(e.toString());
+            return false;
+        }finally{
+            try{
+               con.close(); 
+            }catch (SQLException e){
+                System.out.println(e.toString());
+            }
+            
+        }
+          
+       
+        
+    }
+    
+    public boolean ModificarProveedor(Proveedor pr){
+        String sql = "UPDATE proveedor SET ruc=?, nombre=?, telefono=?, direccion=?, razon=? WHERE id =?";
+        try{
+            con = cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, pr.getRuc());
+            ps.setString(2, pr.getNombre());
+            ps.setInt(3, pr.getTelefono());
+            ps.setString(4, pr.getDireccion());
+            ps.setString(5, pr.getRazon());
+            ps.setInt(6, pr.getId());
+            ps.execute();
+            return true;
+           
+        }catch(SQLException e){
+            System.out.println(e.toString());
+            return false;
+        }finally{
+            try{
+                con.close();
+            }catch(SQLException e){
+                System.out.println(e.toString());
+            }
+        }
+    }
+    
+    
+    
 }

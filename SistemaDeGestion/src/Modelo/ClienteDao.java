@@ -75,6 +75,7 @@ ListaCl.add(cl);
     }
 return ListaCl;
 }
+
 public boolean EliminarCliente(int id){
     String sql= "DELETE FROM clientes WHERE id =?";
     try{
