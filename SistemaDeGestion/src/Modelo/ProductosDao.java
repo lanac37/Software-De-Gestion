@@ -76,7 +76,7 @@ return Listapro;
 }
     
     
-public boolean EliminarProductos(int id){
+    public boolean EliminarProductos(int id){
     String sql= "DELETE FROM productos WHERE id =?";
     try{
         ps = con.prepareStatement(sql);
@@ -97,7 +97,7 @@ public boolean EliminarProductos(int id){
     }
  }
 
-public boolean ModificarProductos(Productos pro){
+    public boolean ModificarProductos(Productos pro){
     String sql = "UPDATE productos SET codigo=?,nombre=?,proveedor=?, stock=?,precio=? WHERE id=?";
     try{
         ps=con.prepareStatement(sql);
@@ -120,4 +120,24 @@ public boolean ModificarProductos(Productos pro){
         }
     }
 }  
+    
+    public Productos BuscarPro(String cod){
+    Productos producto = new Productos();
+    String sql= "SELECT * FROM productos WHERE codigo = ?";
+    try{
+        con=cn.getConnection();
+        ps=con.prepareStatement(sql);
+        rs=ps.executeQuery();
+        
+        if(rs.next ()){
+        producto.setNombre(rs.getString("nombre"));
+        producto.setPrecio(rs.getDouble("precio"));
+        producto.setStock(rs.getInt("stock"));
+        }
+        
+    }catch (SQLException e){
+        System.out.println(e.toString());
+    }
+    return producto;
+    }
 }

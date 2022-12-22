@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * and open the template in the editor.|1e 
  */
 package Vista;
 
@@ -11,6 +11,8 @@ import Modelo.Productos;
 import Modelo.ProductosDao;
 import Modelo.Proveedor;
 import Modelo.ProveedorDao;
+import Reportes.Excel;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -283,7 +285,7 @@ public class Sistema extends javax.swing.JFrame {
                         .addComponent(btnProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bntProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNuevaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 170, Short.MAX_VALUE))
+                        .addComponent(btnNuevaVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jLabel2)))
@@ -336,6 +338,11 @@ public class Sistema extends javax.swing.JFrame {
         txtCodigoVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoVentaActionPerformed(evt);
+            }
+        });
+        txtCodigoVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoVentaKeyPressed(evt);
             }
         });
 
@@ -399,8 +406,8 @@ public class Sistema extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(txtCodigoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(txtCodigoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(txtDescripcionVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -894,6 +901,11 @@ public class Sistema extends javax.swing.JFrame {
         btnNuevoPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo.png"))); // NOI18N
 
         btnExcelPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excel.png"))); // NOI18N
+        btnExcelPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcelProActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1362,7 +1374,8 @@ public class Sistema extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "los campos estan vacios");
         }        
-        
+        LimpiarTable();
+        ListarProductos();
     }//GEN-LAST:event_btnGuardarproActionPerformed
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
@@ -1424,6 +1437,41 @@ public class Sistema extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarproActionPerformed
 
+    private void btnExcelProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelProActionPerformed
+        // TODO add your handling code here:
+        Excel.reporte();
+    }//GEN-LAST:event_btnExcelProActionPerformed
+
+    private void txtCodigoVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoVentaKeyPressed
+        // TODO add your handling code here:
+               if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            if(!"".equals(txtCodigoVenta.getText())){
+                String cod=txtCodigoVenta.getText();
+                pro=proDao.BuscarPro(cod);
+                if(pro.getNombre() != null){
+                txtDescripcionVenta.setText(""+pro.getNombre());
+                txtPrecioVenta.setText(""+pro.getPrecio());
+                txtStockDisponible.setText(""+pro.getStock());
+                txtCantidadVenta.requestFocus();
+                }else{
+                txtDescripcionVenta.setText("");
+                txtPrecioVenta.setText("");
+                txtStockDisponible.setText("");
+                txtCodigoVenta.requestFocus();
+                      
+                }
+            
+            }
+                else{
+                JOptionPane.showMessageDialog(null, "Ingrese el codigo del producto");
+                txtCodigoVenta.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txtCodigoVentaKeyPressed
+
+    
+    
+    
     /**
      * @param args the command line arguments
      */
