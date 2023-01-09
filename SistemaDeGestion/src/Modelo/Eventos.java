@@ -31,4 +31,12 @@ public class Eventos {
             evt.consume();
         }
     }
+    
+        public void textnumKeyPress(KeyEvent evt) {
+// declaramos una variable y le asignamos un evento
+        char car = evt.getKeyChar();
+        if ((car < 'a' || car > 'z') && (car < 'A' || car > 'Z')&&(car < '0' || car > '9') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }
 }

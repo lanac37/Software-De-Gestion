@@ -1938,7 +1938,7 @@ txtCodigoVenta.requestFocus();
 
     private void txtCodigoProKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProKeyTyped
         // TODO add your handling code here:
-        event.textKeyPress(evt);
+        event.textnumKeyPress(evt);
     }//GEN-LAST:event_txtCodigoProKeyTyped
 
     private void txtDesProKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDesProKeyTyped
@@ -2300,17 +2300,17 @@ private void pdf(){
         
         Encabezado.addCell(img);
         
-        String ruc = "1234567";
+        /*String ruc = "1234567";
         String nom = "NICOLE Y MICHELLE";
         String tel = "2233445";
         String dir = "SANGOLQUI";
-        String ra = "NICOLE Y MICHELLE ";
+        String ra = "NICOLE Y MICHELLE ";*/
         
-       /*String ruc = txtRucConfig.getText();
+        String ruc = txtRucConfig.getText();
         String nom = txtNombreConfig.getText();
         String tel = txtTelefonoConfig.getText();
         String dir = txtDireccionConfig.getText();
-        String ra = txtRazonConfig.getText();*/
+        String ra = txtRazonConfig.getText();
         
         Encabezado.addCell("");
         Encabezado.addCell("Ruc: "+ruc+ "\nNombre: "+nom+"\nTelefono: "+tel+ "\nDireccion: "+dir+"\nRazon: "+ra);
